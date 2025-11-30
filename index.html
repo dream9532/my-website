@@ -3,23 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>法務理債策略研究室 | AI 金融法律健診</title>
+    <title>法務理債策略研究室 | 法務精準 × 理債有據</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     
     <script>
-        // 依照您提供的 styles.css 與 JSON 設定配色
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        primary: '#003B73', // 深藍色 (主色)
-                        secondary: '#0077C8', // 次要藍
+                        primary: '#003B73', // 深藍色 (品牌主色)
+                        secondary: '#005A9E', // 次要藍
                         accent: '#FFBF00', // 金黃色 (強調/按鈕)
+                        surface: '#FFFFFF', // 白色
                         background: '#F7FAFF', // 淺藍背景
-                        surface: '#FFFFFF', // 白色區塊
                     },
                     fontFamily: {
                         sans: ['Noto Sans TC', 'sans-serif'],
@@ -30,303 +27,161 @@
     </script>
     <style>
         html { scroll-behavior: smooth; }
-        .view-section { display: none; opacity: 0; transition: opacity 0.3s ease-in-out; }
-        .view-section.active { display: block; opacity: 1; }
-        .gradient-bg { background: linear-gradient(180deg, #003B73 0%, #0077C8 100%); }
-        .card-shadow { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-        .card-hover:hover { transform: translateY(-5px); transition: 0.3s; }
+        .hero-bg { background: linear-gradient(135deg, #003B73 0%, #002855 100%); }
+        .card-hover:hover { transform: translateY(-5px); transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0,59,115,0.15); }
+        .btn-primary { 
+            background-color: #FFBF00; 
+            color: #003B73; 
+            padding: 12px 32px; 
+            border-radius: 6px; 
+            font-weight: bold; 
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .btn-primary:hover { background-color: #ffcf33; transform: scale(1.05); }
+        
+        .btn-secondary { 
+            border: 2px solid white; 
+            color: white; 
+            padding: 10px 30px; 
+            border-radius: 6px; 
+            font-weight: bold; 
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .btn-secondary:hover { background-color: white; color: #003B73; }
     </style>
 </head>
 <body class="bg-background text-gray-800 antialiased font-sans flex flex-col min-h-screen">
 
     <nav class="sticky top-0 z-50 bg-primary text-white shadow-lg">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-xl md:text-2xl font-bold tracking-wide flex items-center gap-2 cursor-pointer" onclick="router('home')">
+            <div class="text-xl md:text-2xl font-bold tracking-wide flex items-center gap-2">
                 <span>⚖️</span> 法務理債策略研究室
             </div>
             <div class="hidden md:flex space-x-6 text-sm font-medium">
-                <button onclick="router('home')" class="hover:text-accent transition">首頁</button>
-                <button onclick="router('services')" class="hover:text-accent transition">六大法律服務</button>
-                <button onclick="router('ai-tools')" class="text-accent border border-accent px-3 py-1 rounded hover:bg-accent hover:text-primary transition">AI 法務工作台</button>
-                <button onclick="router('pricing')" class="hover:text-accent transition">健診方案</button>
+                <a href="#values" class="hover:text-accent transition">核心價值</a>
+                <a href="#services" class="hover:text-accent transition">核心服務</a>
+                <a href="#process" class="hover:text-accent transition">服務流程</a>
             </div>
         </div>
     </nav>
 
     <main class="flex-grow">
         
-        <section id="home" class="view-section active">
-            <div class="gradient-bg text-white py-20">
-                <div class="container mx-auto px-6 text-center">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-6">法務理債策略研究室</h1>
-                    <p class="text-xl mb-4 text-gray-200">LegalTech 2.0｜AI × 法律 × 財務 × 科技跨領域服務</p>
-                    <p class="text-lg mb-8 text-gray-300">花不到一杯咖啡的價格，就能知道你的財務狀況是否健康。</p>
-                    <button onclick="router('pricing')" class="bg-accent text-primary font-bold py-3 px-8 rounded-md shadow-lg hover:bg-yellow-400 transition transform hover:scale-105">
-                        立即開始健診
-                    </button>
+        <section class="hero-bg text-white py-24 relative overflow-hidden">
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">法務精準 × 理債有據</h1>
+                <h2 class="text-2xl md:text-3xl font-medium mb-8 text-blue-100">打造你的法律風控與債務策略</h2>
+                <p class="text-lg md:text-xl mb-12 max-w-3xl mx-auto text-gray-300 leading-relaxed">
+                    以法律專業、財務結構分析與資料科學，<br class="hidden md:block">協助你看懂債務、降低風險、重建掌控權。
+                </p>
+                <div class="cta flex flex-col md:flex-row justify-center gap-6">
+                    <a href="#" class="btn-primary shadow-lg">立即獲得完整診斷</a>
+                    <a href="#" class="btn-secondary shadow-lg">免費債務結構評估</a>
                 </div>
             </div>
+            <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+        </section>
 
-            <div class="py-16 container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-primary text-center mb-12">三大核心價值</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-blue-50 p-8 rounded-lg text-center card-hover">
-                        <div class="text-4xl mb-4">📊</div>
-                        <h3 class="text-xl font-bold text-primary mb-3">專業數據分析</h3>
-                        <p class="text-gray-600">以銀行審核邏輯為模型，從負債、信用、現金流三大面向給你最貼近真實核貸的評估。</p>
-                    </div>
-                    <div class="bg-blue-50 p-8 rounded-lg text-center card-hover">
-                        <div class="text-4xl mb-4">💰</div>
-                        <h3 class="text-xl font-bold text-primary mb-3">低成本高價值</h3>
-                        <p class="text-gray-600">價格壓低至一般人都能負擔，仍具備完整、專業的分析深度。</p>
-                    </div>
-                    <div class="bg-blue-50 p-8 rounded-lg text-center card-hover">
-                        <div class="text-4xl mb-4">🔒</div>
-                        <h3 class="text-xl font-bold text-primary mb-3">隱私保護</h3>
-                        <p class="text-gray-600">全程加密，不留存個資、不推銷商品、不外洩任何資料。</p>
-                    </div>
+        <section id="values" class="py-20 container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-primary text-center mb-16 relative">
+                我們的核心價值
+                <span class="block w-16 h-1 bg-accent mx-auto mt-4 rounded"></span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="value-item bg-white p-10 rounded-xl shadow-md border-t-4 border-primary card-hover text-center">
+                    <div class="text-5xl mb-6">🛡️</div>
+                    <h3 class="text-2xl font-bold text-primary mb-4">法律風控</h3>
+                    <p class="text-gray-600 leading-relaxed">以法律為基礎解析權利義務、降低法律風險，確保您的權益不受侵害。</p>
+                </div>
+                <div class="value-item bg-white p-10 rounded-xl shadow-md border-t-4 border-accent card-hover text-center">
+                    <div class="text-5xl mb-6">📊</div>
+                    <h3 class="text-2xl font-bold text-primary mb-4">債務結構診斷</h3>
+                    <p class="text-gray-600 leading-relaxed">用財務科學與資料分析看清問題本質，量化數據，不再憑感覺理債。</p>
+                </div>
+                <div class="value-item bg-white p-10 rounded-xl shadow-md border-t-4 border-primary card-hover text-center">
+                    <div class="text-5xl mb-6">♟️</div>
+                    <h3 class="text-2xl font-bold text-primary mb-4">策略化解決方案</h3>
+                    <p class="text-gray-600 leading-relaxed">提供可執行、可落地的完整策略，從談判到訴訟，步步為營。</p>
                 </div>
             </div>
+        </section>
 
-            <div class="bg-white py-16">
-                <div class="container mx-auto px-6 text-center">
-                    <h2 class="text-3xl font-bold text-primary mb-8">專業級金融儀表板分析</h2>
-                    <p class="mb-8 text-gray-600">結合 AI 運算的財務健康雷達圖</p>
-                    <div class="max-w-3xl mx-auto bg-white p-4 rounded-xl shadow-2xl border border-gray-100">
-                        <canvas id="financeRadar"></canvas>
+        <section id="services" class="bg-white py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-primary text-center mb-16 relative">
+                    核心服務
+                    <span class="block w-16 h-1 bg-accent mx-auto mt-4 rounded"></span>
+                </h2>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <div class="bg-gray-50 px-8 py-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4 hover:bg-blue-50 transition w-full md:w-auto">
+                        <span class="text-accent text-2xl">✓</span>
+                        <span class="text-xl font-bold text-primary">法務風控分析</span>
+                    </div>
+                    <div class="bg-gray-50 px-8 py-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4 hover:bg-blue-50 transition w-full md:w-auto">
+                        <span class="text-accent text-2xl">✓</span>
+                        <span class="text-xl font-bold text-primary">債務結構診斷</span>
+                    </div>
+                    <div class="bg-gray-50 px-8 py-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4 hover:bg-blue-50 transition w-full md:w-auto">
+                        <span class="text-accent text-2xl">✓</span>
+                        <span class="text-xl font-bold text-primary">不動產爭議處理</span>
+                    </div>
+                    <div class="bg-gray-50 px-8 py-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4 hover:bg-blue-50 transition w-full md:w-auto">
+                        <span class="text-accent text-2xl">✓</span>
+                        <span class="text-xl font-bold text-primary">法律程序策略</span>
+                    </div>
+                    <div class="bg-gray-50 px-8 py-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4 hover:bg-blue-50 transition w-full md:w-auto">
+                        <span class="text-accent text-2xl">✓</span>
+                        <span class="text-xl font-bold text-primary">AI 法務 × 財務資料科學</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="services" class="view-section">
-            <div class="gradient-bg text-white py-16 text-center">
-                <h1 class="text-3xl font-bold">六大法律服務</h1>
-                <p class="mt-4 opacity-90">結合法律專業與 AI 數據分析的實務解決方案</p>
-            </div>
-            <div class="container mx-auto px-6 py-12">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-lg card-shadow card-hover border-t-4 border-primary">
-                        <h3 class="text-xl font-bold text-primary mb-2">行政法務</h3>
-                        <p class="text-gray-600 mb-4 h-12">處理道路、違建、農地、國土管理、稅務等行政案件。</p>
-                        <p class="text-accent font-bold text-lg text-right">$2,500 起</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg card-shadow card-hover border-t-4 border-primary">
-                        <h3 class="text-xl font-bold text-primary mb-2">民事法務</h3>
-                        <p class="text-gray-600 mb-4 h-12">契約、損害賠償、債務、消費爭議、買賣糾紛等。</p>
-                        <p class="text-accent font-bold text-lg text-right">$5,000 起</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg card-shadow card-hover border-t-4 border-primary">
-                        <h3 class="text-xl font-bold text-primary mb-2">稅務法務</h3>
-                        <p class="text-gray-600 mb-4 h-12">財產來源金流分析、稅捐法規風險模型、檢舉書產生。</p>
-                        <p class="text-accent font-bold text-lg text-right">$15,000 起</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg card-shadow card-hover border-t-4 border-primary">
-                        <h3 class="text-xl font-bold text-primary mb-2">不動產法務</h3>
-                        <p class="text-gray-600 mb-4 h-12">建物買賣、租賃合約審閱、產權調查等。</p>
-                        <p class="text-accent font-bold text-lg text-right">$8,000 起</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg card-shadow card-hover border-t-4 border-primary">
-                        <h3 class="text-xl font-bold text-primary mb-2">強制執行</h3>
-                        <p class="text-gray-600 mb-4 h-12">法律文件草擬、執行流程諮詢、債權保全。</p>
-                        <p class="text-accent font-bold text-lg text-right">$7,000 起</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg card-shadow card-hover border-t-4 border-primary">
-                        <h3 class="text-xl font-bold text-primary mb-2">刑事法務</h3>
-                        <p class="text-gray-600 mb-4 h-12">訴訟策略分析、證據整理、法律文件產製。</p>
-                        <p class="text-accent font-bold text-lg text-right">$10,000 起</p>
-                    </div>
+        <section id="process" class="py-20 container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-primary text-center mb-16 relative">
+                服務流程
+                <span class="block w-16 h-1 bg-accent mx-auto mt-4 rounded"></span>
+            </h2>
+            <div class="relative flex flex-col md:flex-row justify-between items-center max-w-5xl mx-auto">
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gray-200 -z-10 transform -translate-y-1/2"></div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64 border-2 border-accent relative mb-8 md:mb-0">
+                    <div class="w-10 h-10 bg-accent text-primary font-bold rounded-full flex items-center justify-center text-xl mx-auto mb-4 absolute -top-5 left-1/2 transform -translate-x-1/2">1</div>
+                    <h3 class="text-xl font-bold text-primary mt-2">初步診斷</h3>
+                    <p class="text-sm text-gray-500 mt-2 font-bold">(免費)</p>
                 </div>
-                <div class="text-center mt-12">
-                    <button class="bg-accent text-primary font-bold py-3 px-10 rounded-md shadow-lg hover:bg-yellow-400" onclick="alert('預約功能即將上線！')">
-                        立即預約諮詢
-                    </button>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64 border border-gray-200 relative mb-8 md:mb-0">
+                    <div class="w-10 h-10 bg-primary text-white font-bold rounded-full flex items-center justify-center text-xl mx-auto mb-4 absolute -top-5 left-1/2 transform -translate-x-1/2">2</div>
+                    <h3 class="text-xl font-bold text-primary mt-2">法務 × 債務分析</h3>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64 border border-gray-200 relative mb-8 md:mb-0">
+                    <div class="w-10 h-10 bg-primary text-white font-bold rounded-full flex items-center justify-center text-xl mx-auto mb-4 absolute -top-5 left-1/2 transform -translate-x-1/2">3</div>
+                    <h3 class="text-xl font-bold text-primary mt-2">策略規劃</h3>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64 border border-gray-200 relative">
+                    <div class="w-10 h-10 bg-primary text-white font-bold rounded-full flex items-center justify-center text-xl mx-auto mb-4 absolute -top-5 left-1/2 transform -translate-x-1/2">4</div>
+                    <h3 class="text-xl font-bold text-primary mt-2">全程陪伴</h3>
                 </div>
             </div>
         </section>
 
-        <section id="ai-tools" class="view-section">
-            <div class="container mx-auto px-6 py-12">
-                <div class="text-center mb-10">
-                    <h2 class="text-3xl font-bold text-primary">AI 法務智能工作台</h2>
-                    <p class="text-gray-600 mt-2">選擇您的法律分身模式，自動生成專業文書</p>
-                </div>
-
-                <div class="flex justify-center mb-8 gap-2 overflow-x-auto pb-2">
-                    <button class="px-6 py-2 bg-primary text-white rounded-full font-bold shadow-md">民事/債務</button>
-                    <button class="px-6 py-2 bg-white text-gray-500 rounded-full hover:bg-gray-100">刑事辯護</button>
-                    <button class="px-6 py-2 bg-white text-gray-500 rounded-full hover:bg-gray-100">行政訴訟</button>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition border border-gray-100 cursor-pointer group">
-                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl mb-4">🔍</div>
-                        <h3 class="text-xl font-bold mb-2 text-primary">案件智能診斷</h3>
-                        <p class="text-gray-500 text-sm mb-4">上傳對話紀錄或存證信函，AI 自動分析法律爭點與勝訴率。</p>
-                        <span class="text-accent text-sm font-bold group-hover:underline">開始診斷 &rarr;</span>
-                    </div>
-
-                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition border border-gray-100 cursor-pointer group">
-                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-2xl mb-4">📝</div>
-                        <h3 class="text-xl font-bold mb-2 text-primary">生成起訴狀</h3>
-                        <p class="text-gray-500 text-sm mb-4">輸入當事人資訊與訴之聲明，自動排版生成符合司法院格式的書狀。</p>
-                        <span class="text-green-600 text-sm font-bold group-hover:underline">建立草稿 &rarr;</span>
-                    </div>
-
-                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition border border-gray-100 cursor-pointer group">
-                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-2xl mb-4">⚖️</div>
-                        <h3 class="text-xl font-bold mb-2 text-primary">生成抗告/異議</h3>
-                        <p class="text-gray-500 text-sm mb-4">針對支付命令或裁定，快速生成抗告狀，爭取時效利益。</p>
-                        <span class="text-accent text-sm font-bold group-hover:underline">立即反擊 &rarr;</span>
-                    </div>
-                </div>
-
-                <div class="mt-12 bg-white p-6 rounded-xl shadow-inner border border-gray-200">
-                    <h4 class="font-bold text-gray-700 mb-4 border-b pb-2">📄 快速生成預覽 (Demo)</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-2">案件類型</label>
-                            <select class="w-full p-2 border rounded bg-gray-50 text-gray-700">
-                                <option>支付命令異議</option>
-                                <option>借款返還訴訟</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-2">債務金額</label>
-                            <input type="text" class="w-full p-2 border rounded bg-gray-50" placeholder="例如：500,000">
-                        </div>
-                        <div class="md:col-span-2">
-                            <label class="block text-sm font-bold text-gray-700 mb-2">案情簡述</label>
-                            <textarea class="w-full p-2 border rounded bg-gray-50 h-24" placeholder="請輸入對方案情概要..."></textarea>
-                        </div>
-                    </div>
-                    <button class="mt-4 bg-primary text-white px-6 py-2 rounded shadow hover:bg-blue-800 flex items-center gap-2">
-                        <span>✨</span> AI 生成書狀預覽
-                    </button>
-                </div>
+        <section class="cta-final bg-primary text-white py-20 text-center">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 leading-tight">從複雜走向清晰，<br>從壓力走向掌控。</h2>
+                <a href="#" class="btn-primary shadow-xl text-lg px-10 py-4">立即預約諮詢</a>
             </div>
         </section>
 
-        <section id="pricing" class="view-section">
-            <div class="gradient-bg text-white py-16 text-center">
-                <h1 class="text-3xl font-bold">健診方案與定價</h1>
-                <p class="mt-4 opacity-90">選擇最適合你的財務優化方案</p>
-            </div>
-            <div class="container mx-auto px-6 py-12">
-                <div class="flex flex-col md:flex-row justify-center gap-6 items-start">
-                    
-                    <div class="bg-white p-8 rounded-lg shadow-md w-full md:w-1/3 border-t-4 border-primary">
-                        <h3 class="text-xl font-bold text-gray-700 mb-2">基礎健診</h3>
-                        <h2 class="text-4xl font-bold text-primary mb-4">$199</h2>
-                        <ul class="mb-8 space-y-2 text-gray-600 text-sm">
-                            <li>✅ 財務健康指數</li>
-                            <li>✅ 現金流壓力分析</li>
-                            <li>✅ 三項具體建議</li>
-                        </ul>
-                        <button class="w-full bg-accent text-primary py-2 rounded font-bold hover:bg-yellow-400">購買方案</button>
-                    </div>
-
-                    <div class="bg-white p-8 rounded-lg shadow-2xl w-full md:w-1/3 border-t-4 border-accent transform scale-105 relative z-10">
-                        <div class="absolute top-0 right-0 bg-accent text-primary text-xs font-bold px-3 py-1 rounded-bl-lg">熱門</div>
-                        <h3 class="text-xl font-bold text-gray-700 mb-2">專業健診</h3>
-                        <h2 class="text-4xl font-bold text-primary mb-4">$499</h2>
-                        <ul class="mb-8 space-y-2 text-gray-600 text-sm">
-                            <li>✅ 完整 FHI 指數</li>
-                            <li>✅ 6 張深度分析圖表</li>
-                            <li>✅ 五項優化建議</li>
-                            <li class="font-bold text-primary">✅ AI 自動撰狀試用</li>
-                        </ul>
-                        <button class="w-full bg-accent text-primary py-3 rounded font-bold hover:bg-yellow-400 shadow-md">購買方案</button>
-                    </div>
-
-                    <div class="bg-white p-8 rounded-lg shadow-md w-full md:w-1/3 border-t-4 border-primary">
-                        <h3 class="text-xl font-bold text-gray-700 mb-2">深度整合</h3>
-                        <h2 class="text-4xl font-bold text-primary mb-4">$2,500</h2>
-                        <ul class="mb-8 space-y-2 text-gray-600 text-sm">
-                            <li>✅ 20 頁完整 PDF 報告</li>
-                            <li>✅ A/B 債務還款模擬</li>
-                            <li>✅ 1對1 個別指導諮詢</li>
-                        </ul>
-                        <button class="w-full bg-accent text-primary py-2 rounded font-bold hover:bg-yellow-400">購買方案</button>
-                    </div>
-                </div>
-
-                <div class="max-w-3xl mx-auto mt-16">
-                    <h3 class="text-2xl font-bold text-center text-primary mb-8">常見問題</h3>
-                    <div class="space-y-6">
-                        <div class="bg-white p-4 rounded shadow border-l-4 border-primary">
-                            <p class="font-bold text-primary">Q：購買後多久可以收到報告？</p>
-                            <p class="text-gray-600 text-sm mt-1">A：199/499 方案 3 分鐘內產生，2500 方案 24 小時內提供。</p>
-                        </div>
-                        <div class="bg-white p-4 rounded shadow border-l-4 border-primary">
-                            <p class="font-bold text-primary">Q：資料是否會被外流？</p>
-                            <p class="text-gray-600 text-sm mt-1">A：不會，本系統採用資料不留存設計，運算完即刪除。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
-    <footer class="bg-primary text-white py-8 mt-auto">
-        <div class="container mx-auto px-6 text-center">
-            <p class="text-lg font-bold mb-2">法務理債策略研究室</p>
-            <p class="text-sm opacity-80">AI 驅動金融健診中心 ｜ &copy; 2025 All Rights Reserved.</p>
-        </div>
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm">
+        <p>&copy; 2025 法務理債策略研究室. All Rights Reserved.</p>
     </footer>
 
-    <script>
-        // SPA 路由
-        function router(viewId) {
-            document.querySelectorAll('.view-section').forEach(el => {
-                el.classList.remove('active');
-                setTimeout(() => { if(!el.classList.contains('active')) el.style.display = 'none'; }, 300);
-            });
-
-            const target = document.getElementById(viewId);
-            if (target) {
-                target.style.display = 'block';
-                setTimeout(() => target.classList.add('active'), 10);
-                window.scrollTo(0, 0);
-                if(viewId === 'home') initChart();
-            }
-        }
-
-        // Chart.js 雷達圖
-        let chartInstance = null;
-        function initChart() {
-            const ctx = document.getElementById('financeRadar').getContext('2d');
-            if(chartInstance) return;
-
-            chartInstance = new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: ['信用評分', '債務收入比(DTI)', '流動性', '還款履歷', '資產多樣性'],
-                    datasets: [{
-                        label: '您的狀態',
-                        data: [65, 59, 30, 81, 56],
-                        backgroundColor: 'rgba(0, 59, 115, 0.2)',
-                        borderColor: '#003B73',
-                        pointBackgroundColor: '#003B73'
-                    }, {
-                        label: '健康基準',
-                        data: [80, 40, 80, 90, 80],
-                        backgroundColor: 'rgba(255, 191, 0, 0.1)',
-                        borderColor: '#FFBF00',
-                        pointBackgroundColor: '#FFBF00'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: { r: { suggestedMin: 0, suggestedMax: 100 } }
-                }
-            });
-        }
-
-        // 初始化
-        document.addEventListener('DOMContentLoaded', () => {
-            router('home');
-        });
-    </script>
 </body>
 </html>
