@@ -3,413 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supreme Legal AI | 台灣全能法務智能官</title>
+    <title>法務理債策略研究室 | AI 金融法律健診</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        // 依照您提供的 styles.css 與 JSON 設定配色
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#003B73', // 深藍色 (主色)
+                        secondary: '#0077C8', // 次要藍
+                        accent: '#FFBF00', // 金黃色 (強調/按鈕)
+                        background: '#F7FAFF', // 淺藍背景
+                        surface: '#FFFFFF', // 白色區塊
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* 基礎設定 */
-        :root {
-            /* 綠色系配色：象徵專業、和平與生機 */
-            --primary-color: #2E7D32; /* 專業森林綠 */
-            --secondary-color: #43A047; /* 明亮綠 */
-            --accent-color: #1B5E20; /* 深綠 */
-            --bg-light: #F1F8E9; /* 淺綠背景 */
-            --text-dark: #333333;
-            --text-light: #ffffff;
-            --gray-light: #f4f4f4;
-        }
-
-        body {
-            font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            color: var(--text-dark);
-            scroll-behavior: smooth;
-        }
-
-        a { text-decoration: none; }
-        
-        /* 導航欄 */
-        header {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav-links a {
-            color: var(--text-light);
-            margin-left: 20px;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        .nav-btn {
-            background-color: var(--text-light);
-            color: var(--primary-color);
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .nav-btn:hover {
-            background-color: var(--secondary-color);
-            color: var(--text-light);
-        }
-
-        [cite_start]/* 主視覺區 (Hero Section) [cite: 39-42] */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--text-light);
-            padding: 100px 5%;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            opacity: 0.95;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background-color: #FFD700; /* 金黃色跳色 */
-            color: #333;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            background-color: #ffea70;
-        }
-
-        [cite_start]/* 特色亮點 [cite: 48] */
-        .highlights {
-            padding: 40px 5%;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            text-align: center;
-            border-bottom: 1px solid #eee;
-            gap: 30px;
-        }
-        
-        .highlight-item {
-            flex: 1;
-            min-width: 200px;
-            padding: 20px;
-        }
-
-        .highlight-item h4 {
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        [cite_start]/* 核心功能區 [cite: 43-47] */
-        .features {
-            padding: 80px 5%;
-            background-color: var(--bg-light);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            color: var(--primary-color);
-            margin-bottom: 60px;
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background-color: var(--secondary-color);
-            margin: 15px auto 0;
-            border-radius: 2px;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            text-align: center;
-            transition: 0.3s;
-            border-top: 5px solid var(--primary-color);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .feature-card h3 {
-            color: var(--accent-color);
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-
-        [cite_start]/* 使用步驟 [cite: 49-53] */
-        .how-it-works {
-            padding: 80px 5%;
-            background-color: white;
-            text-align: center;
-        }
-
-        .steps-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-top: 50px;
-        }
-
-        .step {
-            flex: 1;
-            min-width: 200px;
-            max-width: 250px;
-            position: relative;
-        }
-
-        .step-number {
-            background-color: var(--secondary-color);
-            color: white;
-            width: 50px;
-            height: 50px;
-            line-height: 50px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            font-weight: bold;
-            font-size: 1.4rem;
-            box-shadow: 0 4px 10px rgba(67, 160, 71, 0.3);
-        }
-
-        .step h4 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        [cite_start]/* 常見問題 [cite: 56-60] */
-        .faq {
-            padding: 80px 5%;
-            background-color: var(--gray-light);
-        }
-
-        .faq-item {
-            background: white;
-            margin-bottom: 20px;
-            padding: 25px;
-            border-radius: 8px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            border-left: 5px solid var(--primary-color);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .faq-q {
-            font-weight: bold;
-            color: var(--primary-color);
-            font-size: 1.15rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .faq-q::before {
-            content: 'Q.';
-            margin-right: 10px;
-            font-weight: 900;
-            color: var(--secondary-color);
-        }
-
-        [cite_start]/* 頁尾 [cite: 62] */
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 60px 5%;
-        }
-
-        .footer-cta {
-            margin-bottom: 40px;
-        }
-
-        .footer-cta h3 {
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-        }
-
-        /* 響應式設計 */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            .nav-links { display: none; } /* 手機版隱藏導航連結 */
-            .feature-grid { grid-template-columns: 1fr; }
-        }
+        html { scroll-behavior: smooth; }
+        .view-section { display: none; opacity: 0; transition: opacity 0.3s ease-in-out; }
+        .view-section.active { display: block; opacity: 1; }
+        .gradient-bg { background: linear-gradient(180deg, #003B73 0%, #0077C8 100%); }
+        .card-shadow { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .card-hover:hover { transform: translateY(-5px); transition: 0.3s; }
     </style>
 </head>
-<body>
+<body class="bg-background text-gray-800 antialiased font-sans flex flex-col min-h-screen">
 
-    <header>
-        <div class="logo">⚖️ Supreme Legal AI</div>
-        <nav class="nav-links">
-            <a href="#features">核心功能</a>
-            <a href="#how-it-works">使用教學</a>
-            <a href="#faq">常見問題</a>
-        </nav>
-        <a href="#" class="nav-btn">v4.1 最新版</a>
-    </header>
-
-    <section class="hero">
-        <h1>Supreme Legal AI｜你的全能法律智能助手</h1>
-        <p>快速梳理案情、分析證據，一鍵生成法律文書。<br>運用 Gemini 1.5 Flash Vision 技術，輕鬆應對繁雜法律事務。</p>
-        <a href="#" class="cta-button">立即開始體驗</a>
-        <div style="margin-top: 25px; font-size: 0.9em; opacity: 0.8;">*需自備 Google Gemini API Key</div>
-    </section>
-
-    <section class="highlights">
-        <div class="highlight-item">
-            <h4>👁️ 結合視覺 AI</h4>
-            <p>支援圖片證據分析，精準解讀現場照片</p>
-        </div>
-        <div class="highlight-item">
-            <h4>🔒 資料安全保障</h4>
-            <p>本地運算處理，資料不留存伺服器</p>
-        </div>
-        <div class="highlight-item">
-            <h4>⚖️ 適用台灣法規</h4>
-            <p>專為台灣法律環境優化的生成模型</p>
-        </div>
-    </section>
-
-    <section id="features" class="features">
-        <h2 class="section-title">三大核心功能模組</h2>
-        <div class="feature-grid">
-            <div class="feature-card">
-                <span class="icon">⚖️</span>
-                <h3>案情分析 (Gavel)</h3>
-                <p><strong>專業律師視角診斷</strong></p>
-                <p style="margin-top: 15px; color: #666;">
-                    輸入案情事實與照片，AI 即時產出法律分析報告，找出核心爭點、涉及法條並提供建議行動。
-                </p>
+    <nav class="sticky top-0 z-50 bg-primary text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl md:text-2xl font-bold tracking-wide flex items-center gap-2 cursor-pointer" onclick="router('home')">
+                <span>⚖️</span> 法務理債策略研究室
             </div>
-
-            <div class="feature-card">
-                <span class="icon">📄</span>
-                <h3>自動撰狀 (FileText)</h3>
-                <p><strong>公文草擬專家</strong></p>
-                <p style="margin-top: 15px; color: #666;">
-                    不懂格式沒關係，AI 自動按照台灣法院標準，替你草擬起訴狀、抗告狀、刑事告訴狀等文件。
-                </p>
-            </div>
-
-            <div class="feature-card">
-                <span class="icon">🛡️</span>
-                <h3>證據評估 (ShieldAlert)</h3>
-                <p><strong>證據效力把關</strong></p>
-                <p style="margin-top: 15px; color: #666;">
-                    上傳圖片或輸入文字證據，AI 從證據法角度評估其「證據能力」與「證明力」，並提供補強建議。
-                </p>
+            <div class="hidden md:flex space-x-6 text-sm font-medium">
+                <button onclick="router('home')" class="hover:text-accent transition">首頁</button>
+                <button onclick="router('services')" class="hover:text-accent transition">六大法律服務</button>
+                <button onclick="router('ai-tools')" class="text-accent border border-accent px-3 py-1 rounded hover:bg-accent hover:text-primary transition">AI 法務工作台</button>
+                <button onclick="router('pricing')" class="hover:text-accent transition">健診方案</button>
             </div>
         </div>
-    </section>
+    </nav>
 
-    <section id="how-it-works" class="how-it-works">
-        <h2 class="section-title">簡單四步驟，即刻上手</h2>
-        <div class="steps-container">
-            <div class="step">
-                <div class="step-number">1</div>
-                <h4>選擇功能</h4>
-                <p>依需求點擊「案情分析」、「自動撰狀」或「證據評估」。</p>
-            </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <h4>輸入/上傳</h4>
-                <p>填寫案件事實，並可上傳最多 10 張關鍵證據照片。</p>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <h4>AI 智能生成</h4>
-                <p>輸入 API Key 後點擊啟動，等待 AI 快速運算。</p>
-            </div>
-            <div class="step">
-                <div class="step-number">4</div>
-                <h4>獲取結果</h4>
-                <p>右側即時顯示分析報告或文書草稿，一鍵複製使用。</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="faq" class="faq">
-        <h2 class="section-title">常見問題</h2>
+    <main class="flex-grow">
         
-        <div class="faq-item">
-            <div class="faq-q">我需要提供什麼才能使用？</div>
-            <div class="faq-a">A: 您需要一組有效的 Google Gemini API Key 來啟用 AI 服務。取得金鑰後，只需在頁面頂部輸入即可開始使用。</div>
-        </div>
+        <section id="home" class="view-section active">
+            <div class="gradient-bg text-white py-20">
+                <div class="container mx-auto px-6 text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">法務理債策略研究室</h1>
+                    <p class="text-xl mb-4 text-gray-200">LegalTech 2.0｜AI × 法律 × 財務 × 科技跨領域服務</p>
+                    <p class="text-lg mb-8 text-gray-300">花不到一杯咖啡的價格，就能知道你的財務狀況是否健康。</p>
+                    <button onclick="router('pricing')" class="bg-accent text-primary font-bold py-3 px-8 rounded-md shadow-lg hover:bg-yellow-400 transition transform hover:scale-105">
+                        立即開始健診
+                    </button>
+                </div>
+            </div>
 
-        <div class="faq-item">
-            <div class="faq-q">上傳的資料會不會外流？</div>
-            <div class="faq-a">A: 您的案件資料全程在您的本地瀏覽器運算，我們不會將資料上傳至伺服器，也不會留存。</div>
-        </div>
+            <div class="py-16 container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-primary text-center mb-12">三大核心價值</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-blue-50 p-8 rounded-lg text-center card-hover">
+                        <div class="text-4xl mb-4">📊</div>
+                        <h3 class="text-xl font-bold text-primary mb-3">專業數據分析</h3>
+                        <p class="text-gray-600">以銀行審核邏輯為模型，從負債、信用、現金流三大面向給你最貼近真實核貸的評估。</p>
+                    </div>
+                    <div class="bg-blue-50 p-8 rounded-lg text-center card-hover">
+                        <div class="text-4xl mb-4">💰</div>
+                        <h3 class="text-xl font-bold text-primary mb-3">低成本高價值</h3>
+                        <p class="text-gray-600">價格壓低至一般人都能負擔，仍具備完整、專業的分析深度。</p>
+                    </div>
+                    <div class="bg-blue-50 p-8 rounded-lg text-center card-hover">
+                        <div class="text-4xl mb-4">🔒</div>
+                        <h3 class="text-xl font-bold text-primary mb-3">隱私保護</h3>
+                        <p class="text-gray-600">全程加密，不留存個資、不推銷商品、不外洩任何資料。</p>
+                    </div>
+                </div>
+            </div>
 
-        <div class="faq-item">
-            <div class="faq-q">Supreme Legal AI 生成的法律分析可靠嗎？</div>
-            <div class="faq-a">A: 本工具結合專業法律數據與 AI 模型，提供的分析報告可作參考依據，但建議最終文件仍需由專業律師覆核。</div>
-        </div>
-    </section>
+            <div class="bg-white py-16">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="text-3xl font-bold text-primary mb-8">專業級金融儀表板分析</h2>
+                    <p class="mb-8 text-gray-600">結合 AI 運算的財務健康雷達圖</p>
+                    <div class="max-w-3xl mx-auto bg-white p-4 rounded-xl shadow-2xl border border-gray-100">
+                        <canvas id="financeRadar"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <footer>
-        <div class="footer-cta">
-            <h3>立即體驗 Supreme Legal AI，讓 AI 成為您的法律智囊！</h3>
-            <a href="#" class="cta-button">開始免費使用</a>
+        <section id="services" class="view-section">
+            <div class="gradient-bg text-white py-16 text-center">
+                <h1 class="text-3xl font-bold">六大法律服務</h1>
+                <p class="mt-4 opacity-90">結合法律專業與 AI 數據分析的實務解決方案</p>
+            </div>
+            <div class="container mx-auto px-6 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg card-shadow card-hover border-t-4 border-primary">
+                        <h3 class="text-xl font-bold text-primary mb-2">行政法務</h3>
+                        <p class="text-gray-600 mb-4 h-12">處理道路、違建、農地、國土管理、稅務等行政案件。</p>
+                        <p class="text-accent font-bold text-lg text-right">$2,500 起</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg card-shadow card-hover border-t-4 border-primary">
+                        <h3 class="text-xl font-bold text-primary mb-2">民事法務</h3>
+                        <p class="text-gray-600 mb-4 h-12">契約、損害賠償、債務、消費爭議、買賣糾紛等。</p>
+                        <p class="text-accent font-bold text-lg text-right">$5,000 起</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg card-shadow card-hover border-t-4 border-primary">
+                        <h3 class="text-xl font-bold text-primary mb-2">稅務法務</h3>
+                        <p class="text-gray-600 mb-4 h-12">財產來源金流分析、稅捐法規風險模型、檢舉書產生。</p>
+                        <p class="text-accent font-bold text-lg text-right">$15,000 起</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg card-shadow card-hover border-t-4 border-primary">
+                        <h3 class="text-xl font-bold text-primary mb-2">不動產法務</h3>
+                        <p class="text-gray-600 mb-4 h-12">建物買賣、租賃合約審閱、產權調查等。</p>
+                        <p class="text-accent font-bold text-lg text-right">$8,000 起</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg card-shadow card-hover border-t-4 border-primary">
+                        <h3 class="text-xl font-bold text-primary mb-2">強制執行</h3>
+                        <p class="text-gray-600 mb-4 h-12">法律文件草擬、執行流程諮詢、債權保全。</p>
+                        <p class="text-accent font-bold text-lg text-right">$7,000 起</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg card-shadow card-hover border-t-4 border-primary">
+                        <h3 class="text-xl font-bold text-primary mb-2">刑事法務</h3>
+                        <p class="text-gray-600 mb-4 h-12">訴訟策略分析、證據整理、法律文件產製。</p>
+                        <p class="text-accent font-bold text-lg text-right">$10,000 起</p>
+                    </div>
+                </div>
+                <div class="text-center mt-12">
+                    <button class="bg-accent text-primary font-bold py-3 px-10 rounded-md shadow-lg hover:bg-yellow-400" onclick="alert('預約功能即將上線！')">
+                        立即預約諮詢
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="ai-tools" class="view-section">
+            <div class="container mx-auto px-6 py-12">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-primary">AI 法務智能工作台</h2>
+                    <p class="text-gray-600 mt-2">選擇您的法律分身模式，自動生成專業文書</p>
+                </div>
+
+                <div class="flex justify-center mb-8 gap-2 overflow-x-auto pb-2">
+                    <button class="px-6 py-2 bg-primary text-white rounded-full font-bold shadow-md">民事/債務</button>
+                    <button class="px-6 py-2 bg-white text-gray-500 rounded-full hover:bg-gray-100">刑事辯護</button>
+                    <button class="px-6 py-2 bg-white text-gray-500 rounded-full hover:bg-gray-100">行政訴訟</button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition border border-gray-100 cursor-pointer group">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl mb-4">🔍</div>
+                        <h3 class="text-xl font-bold mb-2 text-primary">案件智能診斷</h3>
+                        <p class="text-gray-500 text-sm mb-4">上傳對話紀錄或存證信函，AI 自動分析法律爭點與勝訴率。</p>
+                        <span class="text-accent text-sm font-bold group-hover:underline">開始診斷 &rarr;</span>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition border border-gray-100 cursor-pointer group">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-2xl mb-4">📝</div>
+                        <h3 class="text-xl font-bold mb-2 text-primary">生成起訴狀</h3>
+                        <p class="text-gray-500 text-sm mb-4">輸入當事人資訊與訴之聲明，自動排版生成符合司法院格式的書狀。</p>
+                        <span class="text-green-600 text-sm font-bold group-hover:underline">建立草稿 &rarr;</span>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition border border-gray-100 cursor-pointer group">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-2xl mb-4">⚖️</div>
+                        <h3 class="text-xl font-bold mb-2 text-primary">生成抗告/異議</h3>
+                        <p class="text-gray-500 text-sm mb-4">針對支付命令或裁定，快速生成抗告狀，爭取時效利益。</p>
+                        <span class="text-accent text-sm font-bold group-hover:underline">立即反擊 &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="mt-12 bg-white p-6 rounded-xl shadow-inner border border-gray-200">
+                    <h4 class="font-bold text-gray-700 mb-4 border-b pb-2">📄 快速生成預覽 (Demo)</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">案件類型</label>
+                            <select class="w-full p-2 border rounded bg-gray-50 text-gray-700">
+                                <option>支付命令異議</option>
+                                <option>借款返還訴訟</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">債務金額</label>
+                            <input type="text" class="w-full p-2 border rounded bg-gray-50" placeholder="例如：500,000">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">案情簡述</label>
+                            <textarea class="w-full p-2 border rounded bg-gray-50 h-24" placeholder="請輸入對方案情概要..."></textarea>
+                        </div>
+                    </div>
+                    <button class="mt-4 bg-primary text-white px-6 py-2 rounded shadow hover:bg-blue-800 flex items-center gap-2">
+                        <span>✨</span> AI 生成書狀預覽
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="view-section">
+            <div class="gradient-bg text-white py-16 text-center">
+                <h1 class="text-3xl font-bold">健診方案與定價</h1>
+                <p class="mt-4 opacity-90">選擇最適合你的財務優化方案</p>
+            </div>
+            <div class="container mx-auto px-6 py-12">
+                <div class="flex flex-col md:flex-row justify-center gap-6 items-start">
+                    
+                    <div class="bg-white p-8 rounded-lg shadow-md w-full md:w-1/3 border-t-4 border-primary">
+                        <h3 class="text-xl font-bold text-gray-700 mb-2">基礎健診</h3>
+                        <h2 class="text-4xl font-bold text-primary mb-4">$199</h2>
+                        <ul class="mb-8 space-y-2 text-gray-600 text-sm">
+                            <li>✅ 財務健康指數</li>
+                            <li>✅ 現金流壓力分析</li>
+                            <li>✅ 三項具體建議</li>
+                        </ul>
+                        <button class="w-full bg-accent text-primary py-2 rounded font-bold hover:bg-yellow-400">購買方案</button>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-lg shadow-2xl w-full md:w-1/3 border-t-4 border-accent transform scale-105 relative z-10">
+                        <div class="absolute top-0 right-0 bg-accent text-primary text-xs font-bold px-3 py-1 rounded-bl-lg">熱門</div>
+                        <h3 class="text-xl font-bold text-gray-700 mb-2">專業健診</h3>
+                        <h2 class="text-4xl font-bold text-primary mb-4">$499</h2>
+                        <ul class="mb-8 space-y-2 text-gray-600 text-sm">
+                            <li>✅ 完整 FHI 指數</li>
+                            <li>✅ 6 張深度分析圖表</li>
+                            <li>✅ 五項優化建議</li>
+                            <li class="font-bold text-primary">✅ AI 自動撰狀試用</li>
+                        </ul>
+                        <button class="w-full bg-accent text-primary py-3 rounded font-bold hover:bg-yellow-400 shadow-md">購買方案</button>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-lg shadow-md w-full md:w-1/3 border-t-4 border-primary">
+                        <h3 class="text-xl font-bold text-gray-700 mb-2">深度整合</h3>
+                        <h2 class="text-4xl font-bold text-primary mb-4">$2,500</h2>
+                        <ul class="mb-8 space-y-2 text-gray-600 text-sm">
+                            <li>✅ 20 頁完整 PDF 報告</li>
+                            <li>✅ A/B 債務還款模擬</li>
+                            <li>✅ 1對1 個別指導諮詢</li>
+                        </ul>
+                        <button class="w-full bg-accent text-primary py-2 rounded font-bold hover:bg-yellow-400">購買方案</button>
+                    </div>
+                </div>
+
+                <div class="max-w-3xl mx-auto mt-16">
+                    <h3 class="text-2xl font-bold text-center text-primary mb-8">常見問題</h3>
+                    <div class="space-y-6">
+                        <div class="bg-white p-4 rounded shadow border-l-4 border-primary">
+                            <p class="font-bold text-primary">Q：購買後多久可以收到報告？</p>
+                            <p class="text-gray-600 text-sm mt-1">A：199/499 方案 3 分鐘內產生，2500 方案 24 小時內提供。</p>
+                        </div>
+                        <div class="bg-white p-4 rounded shadow border-l-4 border-primary">
+                            <p class="font-bold text-primary">Q：資料是否會被外流？</p>
+                            <p class="text-gray-600 text-sm mt-1">A：不會，本系統採用資料不留存設計，運算完即刪除。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-primary text-white py-8 mt-auto">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-lg font-bold mb-2">法務理債策略研究室</p>
+            <p class="text-sm opacity-80">AI 驅動金融健診中心 ｜ &copy; 2025 All Rights Reserved.</p>
         </div>
-        <p>&copy; 2024 Supreme Legal AI. All rights reserved.</p>
     </footer>
 
+    <script>
+        // SPA 路由
+        function router(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => {
+                el.classList.remove('active');
+                setTimeout(() => { if(!el.classList.contains('active')) el.style.display = 'none'; }, 300);
+            });
+
+            const target = document.getElementById(viewId);
+            if (target) {
+                target.style.display = 'block';
+                setTimeout(() => target.classList.add('active'), 10);
+                window.scrollTo(0, 0);
+                if(viewId === 'home') initChart();
+            }
+        }
+
+        // Chart.js 雷達圖
+        let chartInstance = null;
+        function initChart() {
+            const ctx = document.getElementById('financeRadar').getContext('2d');
+            if(chartInstance) return;
+
+            chartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['信用評分', '債務收入比(DTI)', '流動性', '還款履歷', '資產多樣性'],
+                    datasets: [{
+                        label: '您的狀態',
+                        data: [65, 59, 30, 81, 56],
+                        backgroundColor: 'rgba(0, 59, 115, 0.2)',
+                        borderColor: '#003B73',
+                        pointBackgroundColor: '#003B73'
+                    }, {
+                        label: '健康基準',
+                        data: [80, 40, 80, 90, 80],
+                        backgroundColor: 'rgba(255, 191, 0, 0.1)',
+                        borderColor: '#FFBF00',
+                        pointBackgroundColor: '#FFBF00'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: { r: { suggestedMin: 0, suggestedMax: 100 } }
+                }
+            });
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            router('home');
+        });
+    </script>
 </body>
 </html>
